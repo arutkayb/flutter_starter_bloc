@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_starter/common/models/user.dart';
 import 'package:flutter_starter/common/repository/use_cases/user/i_use_case_user.dart';
-import 'package:flutter_starter/home/controllers/home_screen_state.dart';
-import 'package:flutter_starter/injection.dart';
+import 'package:flutter_starter/locator.dart';
+import 'package:flutter_starter/pages/home/controllers/cubit/home_screen_cubit_state.dart';
 
-class HomeScreenCubit extends Cubit<HomeScreenState> {
+class HomeScreenCubit extends Cubit<HomeScreenCubitState> {
   final IUseCaseUser _useCaseUser = locator.get<IUseCaseUser>();
 
   HomeScreenCubit(super.initialState) {
@@ -12,8 +12,8 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
   }
 
   Future<void> refreshUser() async {
-    emit(HomeScreenState.fetching(state));
+    emit(HomeScreenCubitState.fetching(state));
     final User? user = await _useCaseUser.getUser();
-    emit(HomeScreenState(user, true));
+    emit(HomeScreenCubitState(user, true));
   }
 }
