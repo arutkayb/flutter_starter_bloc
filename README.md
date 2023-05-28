@@ -1,3 +1,3 @@
-# flutter_starter
+# flutter_starter_bloc
 
-A new structured Flutter starter project.
+A structured Flutter starter project with BLOC.
