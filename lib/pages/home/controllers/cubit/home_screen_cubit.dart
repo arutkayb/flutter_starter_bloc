@@ -12,8 +12,8 @@ class HomeScreenCubit extends Cubit<HomeScreenCubitState> {
   }
 
   Future<void> refreshUser() async {
-    emit(HomeScreenCubitState.fetching(state));
+    emit(state.copyWith(isReady: false));
     final User? user = await _useCaseUser.getUser();
-    emit(HomeScreenCubitState(user, true));
+    emit(state.copyWith(isReady: true, user: user));
   }
 }
